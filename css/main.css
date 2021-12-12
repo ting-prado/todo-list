@@ -1,0 +1,60 @@
+body {
+    display: grid;
+    grid-template-columns: 20% 1fr;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+#sidebar {
+    background: #f8d4f9;
+    height: 100vh;
+    padding: 1.5rem;
+    border-right: 2px solid violet;
+}
+
+#heading {
+    font-size: 3rem;
+    text-align: center;
+    margin-top: -0.1rem;
+    font-family: 'Pacifico', cursive;
+    user-select: none;
+}
+
+hr {
+    border: 1px solid #e92fff;
+
+}
+
+#tasks-time {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 25%;
+    font-size: 1.5rem;
+}
+
+#tasks-time a {
+    margin: 0.5rem;
+    text-decoration: none;
+    color: darkslateblue;
+    font-family: 'Shadows Into Light', cursive;
+}
+
+#tasks-time a:hover {
+    color: violet;
+}
+
+#content {
+     background: #fce5fc;
+     overflow-y: scroll;
+}
+
+#content h1 {
+    font-size: 3rem;
+    text-align: center;
+    padding: 1rem;
+    background: #f8d4f9;
+    font-family: 'Gloria Hallelujah', cursive;
+    user-select: none;
+}
