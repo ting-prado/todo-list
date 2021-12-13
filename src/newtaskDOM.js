@@ -4,7 +4,7 @@ const newTaskDiv = () => {
     div.id = 'newTaskCont';
 
     const addImg = new Image();
-    addImg.src = './icons/plus.svg';
+    addImg.src = './icons/plus.png';
 
     const title = document.createElement('input');
     title.classList.add('title');
