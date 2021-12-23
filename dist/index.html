@@ -19,10 +19,44 @@
         <hr>
         <h2>Projects</h2>
         <nav id="projects"></nav>
-        <input type="color" name="color-picker" id="color-picker" value="#83b4dd">
+        <div id="colordiv">
+            <label class='color-label' for="color-picker">Change background color:</label>
+            <input type="color" name="color-picker" id="color-picker" value="#83b4dd">
+        </div>
     </div>
     <div id="content">
+        <div class="taskCont">
+            <div class="taskTop">
+                <img class='titleIcon' src='./icons/plus.png'>
+                <input id='title' type='text' class='title' name='title' placeholder = 'New Task...'>
+            </div>
+            <div class="details">
+                <div class='detailsLeft'>
+                    <label for='desc' class='labels'>Description</label>
+                    <textarea id='desc' class='desc' placeholder="Say something about this task..."></textarea>
+                </div>
+                <div class='detailsRight'>
+                    <label for='project' class='labels'>Project</label>
+                    <select id='project' class='input' name='project'>
+                        <option value='none'>None</option>
+                    </select>
+                    <label for='date' class='labels'>Due Date</label>
+                    <input id='date' class='input' type='date' name='duedate'>
+                    <label for='priority' class='labels'>Priority</label>
+                    <select id='priority' class='input' name='priority'>
+                        <option value='low'>Low</option>
+                        <option value='medium'>Medium</option>
+                        <option value='high'>High</option>
+                    </select>
+                    <div class='btnDiv'>
+                        <button id='cancelBtn' class='btn'>Cancel</button>
+                        <button id='addBtn' class='btn'>Add Button</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="./main.js"></script>
+    <script src="./indexDOM.bundle.js"></script>
+    <script src="./index.bundle.js"></script>
 </body>
 </html>
