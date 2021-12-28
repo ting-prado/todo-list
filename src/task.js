@@ -1,8 +1,8 @@
 const app = (() => {
     const taskArr = [
-        ['personal', 'hi', 'hoe', 'mlem'],
-        ['chores', 'hello', 'hi'],
-        ['top', 'hoe']
+        // ['personal', 'hi', 'hoe', 'mlem'],
+        // ['chores', 'hello', 'hi'],
+        // ['top', 'hoe']
     ];
 
     const addNewProject = project => {
@@ -57,4 +57,4 @@ const Task = (title, desc, date, priority) => {
     return {getTitle, getDesc, getDate, getPriority}
 }
 
-export {app, Task};
+export {Task, app};

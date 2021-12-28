@@ -1,38 +1,7 @@
-import createTaskDOM from './newtaskdom';
+import domCreate from './createdom';
 import { app, Task } from './task';
 
-function addNewProject() {
-    const newItem = document.createElement('li');
-    const span = document.createElement('span');
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.classList.add('project-input');
-    newItem.classList.add('project-options');
-    const close = document.createElement('img');
-    close.src = './icons/delete.png';
-    close.classList.add('icon');
-    newItem.appendChild(span);
-    span.appendChild(input);
-    project.appendChild(newItem);
-    newItem.appendChild(close);
-
-    input.addEventListener('keydown', e => {
-        if(e.key == 'Enter') {
-            span.textContent = input.value;
-            app.addNewProject(span.textContent.toLowerCase());
-        }
-    });
-
-    close.addEventListener('click', () => {
-        app.removeProject(span.textContent.toLowerCase());
-        project.removeChild(newItem);
-    });
-}
-
-function createNewTask() {
-    createTaskDOM('sample', 'hi', 'Personal', '2014-12-25', 'high');
-}
-
+window.addEventListener('load', domCreate.updateProj);
 const colorPicker = document.querySelector('#color-picker');
 const content = document.querySelector('#content');
 colorPicker.addEventListener('change', () => {
@@ -72,5 +41,8 @@ const addBtn = document.querySelector('#addBtn');
 addBtn.addEventListener('click', createNewTask);
 
 const projectAdder = document.querySelector('#project-adder');
-projectAdder.addEventListener('click', addNewProject);
+projectAdder.addEventListener('click', domCreate.project);
 
+function createNewTask() {
+    domCreate.task('sample', 'hi', 'Personal', '2014-12-25', 'High');
+}
