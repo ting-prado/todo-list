@@ -1,39 +1,37 @@
 import createTaskDOM from './newtaskdom';
-import { taskLogic, Task } from './task';
+import { app, Task } from './task';
 
-// function addNewProject() {
-//     const newItem = document.createElement('li');
-//     const span = document.createElement('span');
-//     const input = document.createElement('input');
-//     input.type = 'text';
-//     input.classList.add('project-input');
-//     newItem.classList.add('project-options');
-//     const close = document.createElement('img');
-//     close.src = './icons/delete.png';
-//     close.classList.add('icon');
-//     newItem.appendChild(span);
-//     span.appendChild(input);
-//     project.appendChild(newItem);
-//     newItem.appendChild(close);
+function addNewProject() {
+    const newItem = document.createElement('li');
+    const span = document.createElement('span');
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.classList.add('project-input');
+    newItem.classList.add('project-options');
+    const close = document.createElement('img');
+    close.src = './icons/delete.png';
+    close.classList.add('icon');
+    newItem.appendChild(span);
+    span.appendChild(input);
+    project.appendChild(newItem);
+    newItem.appendChild(close);
 
-//     input.addEventListener('keydown', e => {
-//         if(e.key == 'Enter') {
-//             span.textContent = input.value;
-//             tasks.push([`${span.textContent.toLowerCase()}`]);
-//         }
-//     });
+    input.addEventListener('keydown', e => {
+        if(e.key == 'Enter') {
+            span.textContent = input.value;
+            app.addNewProject(span.textContent.toLowerCase());
+        }
+    });
 
-//     close.addEventListener('click', () => {
-//         let index;
-//         for(let i=0; i<tasks.length; i++) {
-//             if(span.textContent.toLowerCase() == tasks[i][0]){
-//                 index=i;
-//             }
-//         }
-//         tasks.splice([index][0], 1);
-//         project.removeChild(newItem);
-//     });
-// }
+    close.addEventListener('click', () => {
+        app.removeProject(span.textContent.toLowerCase());
+        project.removeChild(newItem);
+    });
+}
+
+function createNewTask() {
+    createTaskDOM('sample', 'hi', 'Personal', '2014-12-25', 'high');
+}
 
 const colorPicker = document.querySelector('#color-picker');
 const content = document.querySelector('#content');
@@ -70,7 +68,9 @@ cancelBtn.addEventListener('click', () => {
     detailsDiv.style.display = 'none';
 });
 
-addBtn.addEventListener('click', createTaskDOM);
+const addBtn = document.querySelector('#addBtn');
+addBtn.addEventListener('click', createNewTask);
 
-//const projectAdder = document.querySelector('#project-adder');
-//projectAdder.addEventListener('click', addNewProject);
+const projectAdder = document.querySelector('#project-adder');
+projectAdder.addEventListener('click', addNewProject);
+

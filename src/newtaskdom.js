@@ -8,12 +8,18 @@ export default function createTaskDOM(taskTitle, taskDesc, taskProject, taskDue,
     const addImg = new Image();
     addImg.src = './icons/plus.png';
     addImg.classList.add('titleIcon');
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.classList.add('checkbox');
+
     const title = document.createElement('input');
     title.classList.add('title');
     title.classList.add('info');
     title.type = 'text';
     title.name = ' title';
     title.value = taskTitle;
+    title.disabled = 'true';
 
     const detailsDiv = document.createElement('div');
     detailsDiv.classList.add('details');
@@ -31,6 +37,7 @@ export default function createTaskDOM(taskTitle, taskDesc, taskProject, taskDue,
     desc.classList.add('desc');
     desc.classList.add('info');
     desc.value = taskDesc;
+    desc.disabled = 'true';
 
     const projectLabel = document.createElement('label');
     projectLabel.classList.add('labels');
@@ -40,7 +47,10 @@ export default function createTaskDOM(taskTitle, taskDesc, taskProject, taskDue,
     project.name = 'project';
     project.classList.add('input');
     project.classList.add('info');
-    project.value = taskProject;
+    const option = document.createElement('option');
+    option.value = taskProject.toLowerCase();
+    option.textContent = taskProject;
+    project.disabled = 'true';
 
     const dateLabel = document.createElement('label');
     dateLabel.classList.add('labels');
@@ -52,6 +62,7 @@ export default function createTaskDOM(taskTitle, taskDesc, taskProject, taskDue,
     date.classList.add('info');
     date.name = 'duedate';
     date.value = `${taskDue}`;
+    date.disabled = true;
 
     const priorityLabel = document.createElement('label');
     priorityLabel.textContent = 'Priority';
@@ -61,19 +72,18 @@ export default function createTaskDOM(taskTitle, taskDesc, taskProject, taskDue,
     priority.classList.add('input');
     priority.classList.add('info');
     priority.name = 'priority';
+    priority.disabled = 'true';
 
     const btnDiv = document.createElement('div');
     btnDiv.classList.add('btnDiv');
     const deleteBtn = document.createElement('button');
     deleteBtn.classList.add('btn');
     deleteBtn.textContent = 'Delete Task';
-    const saveBtn = document.createElement('button');
-    saveBtn.classList.add('btn');
-    saveBtn.textContent = 'Save Changes';
 
     content.appendChild(div);
     div.appendChild(top);
     top.appendChild(addImg);
+    top.appendChild(checkbox);
     top.appendChild(title);
     div.appendChild(detailsDiv);
     detailsDiv.appendChild(detailsLeft);
@@ -82,13 +92,13 @@ export default function createTaskDOM(taskTitle, taskDesc, taskProject, taskDue,
     detailsLeft.appendChild(desc);
     detailsRight.appendChild(projectLabel);
     detailsRight.appendChild(project);
+    project.appendChild(option);
     detailsRight.appendChild(dateLabel);
     detailsRight.appendChild(date);
     detailsRight.appendChild(priorityLabel);
     detailsRight.appendChild(priority);
     detailsRight.appendChild(btnDiv);
     btnDiv.appendChild(deleteBtn);
-    btnDiv.appendChild(saveBtn);
     for(let i=0; i<3; i++) {
         const option = document.createElement('option');
         switch(i) {

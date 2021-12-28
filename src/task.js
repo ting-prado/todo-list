@@ -1,4 +1,4 @@
-const taskLogic = (() => {
+const app = (() => {
     const taskArr = [
         ['personal', 'hi', 'hoe', 'mlem'],
         ['chores', 'hello', 'hi'],
@@ -7,6 +7,14 @@ const taskLogic = (() => {
 
     const addNewProject = project => {
         taskArr.push([project]);
+    }
+
+    const removeProject = project => {
+        for(let i=0; i<taskArr.length; i++){
+            if(project == taskArr[i][0]){
+                taskArr.splice(i, 1);
+            }
+        }
     }
 
     const getProjects = () => taskArr.map(elements => elements[0]);
@@ -37,7 +45,7 @@ const taskLogic = (() => {
         }
     }
 
-    return {addNewProject, getProjects, getTasks, getNumOfProjs, getNumOfTasks, addTasktoArr}
+    return {addNewProject, getProjects, getTasks, getNumOfProjs, getNumOfTasks, addTasktoArr, removeProject}
 })();
 
 const Task = (title, desc, date, priority) => {
@@ -49,4 +57,4 @@ const Task = (title, desc, date, priority) => {
     return {getTitle, getDesc, getDate, getPriority}
 }
 
-export {taskLogic, Task};
+export {app, Task};
