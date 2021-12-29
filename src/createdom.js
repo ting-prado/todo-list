@@ -39,6 +39,15 @@ const domCreate = (() => {
         title.name = ' title';
         title.value = taskTitle;
         title.disabled = 'true';
+
+        const displayDue = document.createElement('p');
+        displayDue.classList.add('displayDue');
+        if(taskDue == undefined) {
+            displayDue.textContent = '';
+        }
+        else {
+            displayDue.textContent = taskDue;
+        }
     
         const detailsDiv = document.createElement('div');
         detailsDiv.classList.add('details');
@@ -56,6 +65,7 @@ const domCreate = (() => {
         desc.classList.add('desc');
         desc.classList.add('info');
         desc.value = taskDesc;
+        desc.placeholder = 'No description...';
         desc.disabled = 'true';
     
         const projectLabel = document.createElement('label');
@@ -107,6 +117,7 @@ const domCreate = (() => {
         top.appendChild(addImg);
         top.appendChild(checkbox);
         top.appendChild(title);
+        top.appendChild(displayDue);
         div.appendChild(detailsDiv);
         detailsDiv.appendChild(detailsLeft);
         detailsDiv.appendChild(detailsRight);
@@ -130,6 +141,12 @@ const domCreate = (() => {
             else if(detailsDiv.style.display == 'flex') {
                 detailsDiv.style.display = 'none';
             }
+        });
+
+        deleteBtn.addEventListener('click', () => {
+            app.removeTask(taskProject, taskTitle);
+            console.log(app.taskArr);
+            content.removeChild(div);
         });
     }
     

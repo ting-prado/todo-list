@@ -1,6 +1,9 @@
 import domCreate from './createdom';
 import { app, Task } from './task';
 
+const projectAdder = document.querySelector('#project-adder');
+projectAdder.addEventListener('click', domCreate.project);
+
 window.addEventListener('load', domCreate.updateProj);
 const colorPicker = document.querySelector('#color-picker');
 const content = document.querySelector('#content');
@@ -25,7 +28,7 @@ const cancelBtn = document.querySelector('#cancelBtn');
 const desc = document.querySelector('#desc');
 const date = document.querySelector('#date');
 const priority = document.querySelector('#priority');
-const project = document.querySelector('#projects');
+const project = document.querySelector('#project');
 const title = document.querySelector('#title');
 
 cancelBtn.addEventListener('click', () => {
@@ -39,10 +42,25 @@ cancelBtn.addEventListener('click', () => {
 
 const addBtn = document.querySelector('#addBtn');
 addBtn.addEventListener('click', createNewTask);
-
-const projectAdder = document.querySelector('#project-adder');
-projectAdder.addEventListener('click', domCreate.project);
+title.addEventListener('keydown', e => {
+    if(e.key == 'Enter'){
+        createNewTask();
+    }
+});
 
 function createNewTask() {
-    domCreate.task('sample', 'hi', 'Personal', '2014-12-25', 'High');
+    if(title.value != '' && project.value != '') {
+        let newTask = Task(title.value, desc.value, date.value, priority.value);
+        domCreate.task(newTask.getTitle(), newTask.getDesc(), project.value, newTask.getDate(), newTask.getPriority());
+        desc.value = '';
+        date.value = '';
+        priority.value = 'low';
+        title.value = '';
+        detailsDiv.style.display = 'none';
+        app.addTasktoArr(project.value, newTask);
+        console.log(app.taskArr);
+    }
+    else {
+        alert('Please enter task title and specify which project it belongs to.');
+    }
 }
