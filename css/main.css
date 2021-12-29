@@ -154,6 +154,8 @@ li span {
     width: auto;
     align-items: center;
     padding: 0.1rem 0.5rem;
+    font-family: 'Asap', sans-serif;
+    position: relative;
 }
 
 .titleIcon {
@@ -169,14 +171,15 @@ li span {
 }
 
 .title {
-    width: 93%;
+    max-width: 97%;
+    width: 80%;
     background: rgb(68, 68, 68);
     color: whitesmoke;
     height: 60%;
     border: 1px hidden;
     outline: none;
     font-size: 1.1rem;
-    font-family: 'Asap', sans-serif;
+    font-family: inherit;
     font-weight: lighter;
     margin-left: 0.2rem;
 }
@@ -184,6 +187,18 @@ li span {
 .checkbox {
     height: 1rem;
     width: 1rem;
+}
+
+.displayDue {
+    font-family: inherit;
+    color: whitesmoke;
+    font-size: 1rem;
+    height: 60%;
+    max-width: 20%;
+    justify-self: end;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.58rem;
 }
 
 .details {
