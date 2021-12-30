@@ -45,16 +45,12 @@ const app = (() => {
         }
     }
 
-    const removeTask = (project, taskTitle) => {
-        // for(let i=0; i<taskArr.length; i++){
-        //     if(taskArr[i][0] == project.toLowerCase()){
-        //         for(let j=0; j<taskArr[i].length; j++) {
-        //             if(taskArr[i][j].title == taskTitle){
-        //                 taskArr[i].splice(j, 1);
-        //             }
-        //         }
-        //     }
-        // }
+    const removeTask = (project, taskObj) => {
+        for(let i=0; i<taskArr.length; i++){
+            if(taskArr[i][0] == project.toLowerCase()){
+                taskArr[i].splice(taskArr[i].indexOf(taskObj), 1);
+            }
+        }
     }
 
     return {taskArr, addNewProject, getProjects, getTasks, getNumOfProjs, getNumOfTasks, addTasktoArr, removeProject, removeTask}

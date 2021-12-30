@@ -17,7 +17,7 @@ const domCreate = (() => {
         addProjOptions();
     }
 
-    const task = (taskTitle, taskDesc, taskProject, taskDue, taskPriority) => {
+    const task = (taskProject, taskObj) => {
         const content = document.querySelector('#content');
         const div = document.createElement('div');
         div.classList.add('taskCont');
@@ -37,16 +37,16 @@ const domCreate = (() => {
         title.classList.add('info');
         title.type = 'text';
         title.name = ' title';
-        title.value = taskTitle;
+        title.value = taskObj.getTitle();
         title.disabled = 'true';
 
         const displayDue = document.createElement('p');
         displayDue.classList.add('displayDue');
-        if(taskDue == undefined) {
+        if(taskObj.getDate() == undefined) {
             displayDue.textContent = '';
         }
         else {
-            displayDue.textContent = taskDue;
+            displayDue.textContent = taskObj.getDate();
         }
     
         const detailsDiv = document.createElement('div');
@@ -64,7 +64,7 @@ const domCreate = (() => {
         descLabel.for = 'desc';
         desc.classList.add('desc');
         desc.classList.add('info');
-        desc.value = taskDesc;
+        desc.value = taskObj.getDesc();
         desc.placeholder = 'No description...';
         desc.disabled = 'true';
     
@@ -90,7 +90,7 @@ const domCreate = (() => {
         date.classList.add('input');
         date.classList.add('info');
         date.name = 'duedate';
-        date.value = `${taskDue}`;
+        date.value = taskObj.getDate();
         date.disabled = true;
     
         const priorityLabel = document.createElement('label');
@@ -103,8 +103,8 @@ const domCreate = (() => {
         priority.name = 'priority';
         priority.disabled = 'true';
         const prioOption = document.createElement('option');
-        prioOption.value = taskPriority.toLowerCase();
-        prioOption.textContent = taskPriority;
+        prioOption.value = taskObj.getPriority().toLowerCase();
+        prioOption.textContent = taskObj.getPriority();
     
         const btnDiv = document.createElement('div');
         btnDiv.classList.add('btnDiv');
@@ -144,8 +144,7 @@ const domCreate = (() => {
         });
 
         deleteBtn.addEventListener('click', () => {
-            app.removeTask(taskProject, taskTitle);
-            console.log(app.taskArr);
+            app.removeTask(taskProject, taskObj);
             content.removeChild(div);
         });
     }

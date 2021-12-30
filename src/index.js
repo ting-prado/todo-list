@@ -51,7 +51,7 @@ title.addEventListener('keydown', e => {
 function createNewTask() {
     if(title.value != '' && project.value != '') {
         let newTask = Task(title.value, desc.value, date.value, priority.value);
-        domCreate.task(newTask.getTitle(), newTask.getDesc(), project.value, newTask.getDate(), newTask.getPriority());
+        domCreate.task(project.value, newTask);
         desc.value = '';
         date.value = '';
         priority.value = 'low';
