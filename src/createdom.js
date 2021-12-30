@@ -2,6 +2,8 @@ import {app} from './task';
 
 const domCreate = (() => {
     const projInput = document.querySelector('#project');
+    const sbProject = document.querySelector('#projects');
+
     const addProjOptions = () => {
         app.getProjects().forEach(project => {
             const option = document.createElement('option');
@@ -149,8 +151,7 @@ const domCreate = (() => {
         });
     }
     
-    const project = () => {
-        const project = document.querySelector('#projects');
+    const newProject = () => {
         const newItem = document.createElement('li');
         const span = document.createElement('span');
         const input = document.createElement('input');
@@ -162,7 +163,7 @@ const domCreate = (() => {
         close.classList.add('icon');
         newItem.appendChild(span);
         span.appendChild(input);
-        project.appendChild(newItem);
+        sbProject.appendChild(newItem);
         newItem.appendChild(close);
     
         input.addEventListener('keydown', e => {
@@ -175,12 +176,34 @@ const domCreate = (() => {
     
         close.addEventListener('click', () => {
             app.removeProject(span.textContent.toLowerCase());
-            project.removeChild(newItem);
+            sbProject.removeChild(newItem);
             updateProj();
         });
     }
 
-    return {task, project, updateProj}
+    const existingProjects = () => {
+        app.getProjects().forEach(project => {
+            const existingItem = document.createElement('li');
+            const span = document.createElement('span');
+            span.textContent = project[0].toUpperCase() + project.slice(1);
+            existingItem.classList.add('project-options');
+            const close = document.createElement('img');
+            close.src = './icons/delete.png';
+            close.classList.add('icon');
+            existingItem.appendChild(span);
+            sbProject.appendChild(existingItem);
+            existingItem.appendChild(close);
+
+            close.addEventListener('click', () => {
+                app.removeProject(span.textContent.toLowerCase());
+                sbProject.removeChild(existingItem);
+                updateProj();
+            });
+        });
+        updateProj();
+    }
+
+    return {task, newProject, existingProjects}
 })();
 
 export default domCreate;

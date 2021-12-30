@@ -2,9 +2,9 @@ import domCreate from './createdom';
 import { app, Task } from './task';
 
 const projectAdder = document.querySelector('#project-adder');
-projectAdder.addEventListener('click', domCreate.project);
+projectAdder.addEventListener('click', domCreate.newProject);
 
-window.addEventListener('load', domCreate.updateProj);
+window.addEventListener('load', domCreate.existingProjects);
 const colorPicker = document.querySelector('#color-picker');
 const content = document.querySelector('#content');
 colorPicker.addEventListener('change', () => {
@@ -58,7 +58,6 @@ function createNewTask() {
         title.value = '';
         detailsDiv.style.display = 'none';
         app.addTasktoArr(project.value, newTask);
-        console.log(app.taskArr);
     }
     else {
         alert('Please enter task title and specify which project it belongs to.');

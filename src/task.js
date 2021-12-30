@@ -1,8 +1,6 @@
 const app = (() => {
     const taskArr = [
-        // ['personal', 'hi', 'hoe', 'mlem'],
-        // ['chores', 'hello', 'hi'],
-        // ['top', 'hoe']
+        ['personal']
     ];
 
     const addNewProject = project => {
@@ -53,7 +51,7 @@ const app = (() => {
         }
     }
 
-    return {taskArr, addNewProject, getProjects, getTasks, getNumOfProjs, getNumOfTasks, addTasktoArr, removeProject, removeTask}
+    return {addNewProject, getProjects, getTasks, getNumOfProjs, getNumOfTasks, addTasktoArr, removeProject, removeTask}
 })();
 
 const Task = (title, desc, date, priority) => {
