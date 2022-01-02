@@ -1,4 +1,5 @@
 import {app} from './task';
+import { formatDistance } from 'date-fns';
 
 const domCreate = (() => {
     const projInput = document.querySelector('#project');
@@ -20,7 +21,7 @@ const domCreate = (() => {
     }
 
     const task = (taskProject, taskObj) => {
-        const content = document.querySelector('#content');
+        const tasksCont = document.querySelector('#tasksCont');
         const div = document.createElement('div');
         div.classList.add('taskCont');
         
@@ -48,7 +49,11 @@ const domCreate = (() => {
             displayDue.textContent = '';
         }
         else {
-            displayDue.textContent = taskObj.getDate();
+            displayDue.textContent = formatDistance(
+                new Date(taskObj.getDate()),
+                new Date(),
+                {addSuffix: true}
+            );
         }
     
         const detailsDiv = document.createElement('div');
@@ -88,7 +93,7 @@ const domCreate = (() => {
         dateLabel.for = 'duedate';
         dateLabel.textContent = 'Due Date';
         const date = document.createElement('input');
-        date.type = 'date';
+        date.type = 'datetime-local';
         date.classList.add('input');
         date.classList.add('info');
         date.name = 'duedate';
@@ -114,7 +119,7 @@ const domCreate = (() => {
         deleteBtn.classList.add('btn');
         deleteBtn.textContent = 'Delete Task';
     
-        content.appendChild(div);
+        tasksCont.appendChild(div);
         div.appendChild(top);
         top.appendChild(addImg);
         top.appendChild(checkbox);
@@ -147,7 +152,14 @@ const domCreate = (() => {
 
         deleteBtn.addEventListener('click', () => {
             app.removeTask(taskProject, taskObj);
-            content.removeChild(div);
+            tasksCont.removeChild(div);
+        });
+
+        checkbox.addEventListener('change', e => {
+            if(e.target.checked) {
+                app.removeTask(taskProject, taskObj);
+                tasksCont.removeChild(div);
+            }
         });
     }
     
