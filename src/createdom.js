@@ -165,33 +165,44 @@ const domCreate = (() => {
     }
     
     const newProject = () => {
+        let projValue = '';
         const newItem = document.createElement('li');
-        const span = document.createElement('span');
         const input = document.createElement('input');
         input.type = 'text';
         input.classList.add('project-input');
         newItem.classList.add('project-options');
-        const close = document.createElement('img');
-        close.src = './icons/delete.png';
-        close.classList.add('icon');
-        newItem.appendChild(span);
-        span.appendChild(input);
+        newItem.appendChild(input);
         sbProject.appendChild(newItem);
-        newItem.appendChild(close);
     
         input.addEventListener('keydown', e => {
             if(e.key == 'Enter') {
-                span.textContent = input.value[0].toUpperCase() + input.value.slice(1).toLowerCase();
-                app.addNewProject(span.textContent.toLowerCase());
+                const span = document.createElement('span');
+                newItem.appendChild(span);
+                projValue = input.value.toLowerCase();
+                span.textContent = projValue[0].toUpperCase() + projValue.slice(1).toLowerCase();
+                newItem.removeChild(input);
+                app.addNewProject(projValue);
                 updateProj();
-            }
-        });
-    
-        close.addEventListener('click', () => {
-            app.removeProject(span.textContent.toLowerCase());
-            sbProject.removeChild(newItem);
 
-            updateProj();
+                const close = document.createElement('img');
+                close.src = './icons/delete.png';
+                close.classList.add('icon');
+                newItem.appendChild(close);
+                
+                span.addEventListener('click', () => {
+                    tasksCont.innerHTML = '';
+                    app.getTasksWithinProj(projValue).forEach(item => {
+                        task(projValue, item);
+                    });
+                });
+
+                close.addEventListener('click', () => {
+                    app.removeProject(projValue);
+                    sbProject.removeChild(newItem);
+        
+                    updateProj();
+                });
+            }
         });
     }
 
@@ -207,6 +218,13 @@ const domCreate = (() => {
             existingItem.appendChild(span);
             sbProject.appendChild(existingItem);
             existingItem.appendChild(close);
+
+            existingItem.addEventListener('click', () => {
+                tasksCont.innerHTML = '';
+                app.getTasksWithinProj(span.textContent.toLowerCase()).forEach(item => {
+                    task(span.textContent.toLowerCase(), item);
+                });
+            });
 
             close.addEventListener('click', () => {
                 app.removeProject(span.textContent.toLowerCase());

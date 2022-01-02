@@ -73,6 +73,7 @@ hr {
     font-size: 125%;
     white-space: pre-wrap;
     height: auto;
+    user-select: none;
 }
 
 .project-options:hover {
