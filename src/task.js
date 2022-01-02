@@ -17,10 +17,11 @@ const app = (() => {
 
     const getProjects = () => taskArr.map(elements => elements[0]);
 
-    const getTasks = project => {
+    const getTasksWithinProj = project => {
+        let tasks = [];
         for(let i=0; i<taskArr.length; i++){
             if(taskArr[i][0] == project) {
-                return taskArr[i].splice(1, taskArr[i].length);
+                return taskArr[i].slice(1);
             }
         }
     }
@@ -51,7 +52,7 @@ const app = (() => {
         }
     }
 
-    return {addNewProject, getProjects, getTasks, getNumOfProjs, getNumOfTasks, addTasktoArr, removeProject, removeTask}
+    return {taskArr, addNewProject, getProjects, getTasksWithinProj, getNumOfProjs, getNumOfTasks, addTasktoArr, removeProject, removeTask}
 })();
 
 const Task = (title, desc, date, priority) => {

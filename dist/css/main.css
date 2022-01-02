@@ -259,7 +259,7 @@ li span {
     margin-bottom: 0.2rem;
 }
 
-input[type=date] {
+input[type=datetime-local] {
     padding-left: 0.2rem;
 }
 

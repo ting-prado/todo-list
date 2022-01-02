@@ -1,5 +1,6 @@
 import domCreate from './createdom';
 import { app, Task } from './task';
+import { parseISO, isSameDay, isSameWeek } from 'date-fns';
 
 const projectAdder = document.querySelector('#project-adder');
 projectAdder.addEventListener('click', domCreate.newProject);
@@ -52,14 +53,67 @@ function createNewTask() {
     if(title.value != '' && project.value != '') {
         let newTask = Task(title.value, desc.value, date.value, priority.value);
         domCreate.task(project.value, newTask);
+        app.addTasktoArr(project.value, newTask);
         desc.value = '';
         date.value = '';
         priority.value = 'low';
         title.value = '';
         detailsDiv.style.display = 'none';
-        app.addTasktoArr(project.value, newTask);
     }
     else {
         alert('Please enter task title and specify which project it belongs to.');
     }
 }
+
+const tasksCont = document.querySelector('#tasksCont');
+const allTasksBtn = document.querySelector('#allTasks');
+const todayTasksBtn = document.querySelector('#todayTasks');
+const weekTasksBtn = document.querySelector('#weekTasks');
+allTasksBtn.addEventListener('click', () => {
+    allTasksBtn.style.color = 'skyblue';
+    todayTasksBtn.style.color = 'whitesmoke';
+    weekTasksBtn.style.color = 'whitesmoke';
+    tasksCont.innerHTML = '';
+
+    for(let i=0; i<app.getNumOfProjs(); i++){
+        app.getTasksWithinProj(app.getProjects()[i]).forEach(task => {
+            domCreate.task(app.getProjects()[i], task);
+        });
+    }
+});
+
+todayTasksBtn.addEventListener('click', () => {
+    allTasksBtn.style.color = 'whitesmoke';
+    todayTasksBtn.style.color = 'skyblue';
+    weekTasksBtn.style.color = 'whitesmoke';
+    tasksCont.innerHTML = '';
+    
+    for(let i=0; i<app.getNumOfProjs(); i++){
+        app.getTasksWithinProj(app.getProjects()[i]).forEach(task => {
+            if(isSameDay(
+                new Date(),
+                parseISO(task.getDate())
+                )){
+                domCreate.task(app.getProjects()[i], task);
+            }
+        });
+    }
+});
+
+weekTasksBtn.addEventListener('click', () => {
+    allTasksBtn.style.color = 'whitesmoke';
+    todayTasksBtn.style.color = 'whitesmoke';
+    weekTasksBtn.style.color = 'skyblue';
+    tasksCont.innerHTML = '';
+    
+    for(let i=0; i<app.getNumOfProjs(); i++){
+        app.getTasksWithinProj(app.getProjects()[i]).forEach(task => {
+            if(isSameWeek(
+                new Date(),
+                parseISO(task.getDate())
+                )){
+                domCreate.task(app.getProjects()[i], task);
+            }
+        });
+    }
+});

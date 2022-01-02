@@ -1,9 +1,10 @@
 import {app} from './task';
-import { formatDistance } from 'date-fns';
+import { formatDistance} from 'date-fns';
 
 const domCreate = (() => {
     const projInput = document.querySelector('#project');
     const sbProject = document.querySelector('#projects');
+    const tasksCont = document.querySelector('#tasksCont');
 
     const addProjOptions = () => {
         app.getProjects().forEach(project => {
@@ -21,7 +22,6 @@ const domCreate = (() => {
     }
 
     const task = (taskProject, taskObj) => {
-        const tasksCont = document.querySelector('#tasksCont');
         const div = document.createElement('div');
         div.classList.add('taskCont');
         
@@ -45,7 +45,8 @@ const domCreate = (() => {
 
         const displayDue = document.createElement('p');
         displayDue.classList.add('displayDue');
-        if(taskObj.getDate() == undefined) {
+
+        if(taskObj.getDate() == undefined || taskObj.getDate() == '') {
             displayDue.textContent = '';
         }
         else {
@@ -85,7 +86,7 @@ const domCreate = (() => {
         project.classList.add('info');
         const projOption = document.createElement('option');
         projOption.value = taskProject.toLowerCase();
-        projOption.textContent = taskProject;
+        projOption.textContent = taskProject[0].toUpperCase() + taskProject.slice(1);
         project.disabled = 'true';
     
         const dateLabel = document.createElement('label');
@@ -189,6 +190,7 @@ const domCreate = (() => {
         close.addEventListener('click', () => {
             app.removeProject(span.textContent.toLowerCase());
             sbProject.removeChild(newItem);
+
             updateProj();
         });
     }
