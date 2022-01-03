@@ -6,6 +6,14 @@ const projectAdder = document.querySelector('#project-adder');
 projectAdder.addEventListener('click', domCreate.newProject);
 
 window.addEventListener('load', domCreate.existingProjects);
+window.addEventListener('load', () => {
+    for(let i=0; i<app.getNumOfProjs(); i++){
+        app.getTasksWithinProj(app.getProjects()[i]).forEach(task => {
+            domCreate.task(app.getProjects()[i], task);
+        });
+    }
+});
+
 const colorPicker = document.querySelector('#color-picker');
 const content = document.querySelector('#content');
 colorPicker.addEventListener('change', () => {
@@ -92,7 +100,7 @@ todayTasksBtn.addEventListener('click', () => {
         app.getTasksWithinProj(app.getProjects()[i]).forEach(task => {
             if(isSameDay(
                 new Date(),
-                parseISO(task.getDate())
+                parseISO(task.date)
                 )){
                 domCreate.task(app.getProjects()[i], task);
             }
@@ -110,7 +118,7 @@ weekTasksBtn.addEventListener('click', () => {
         app.getTasksWithinProj(app.getProjects()[i]).forEach(task => {
             if(isSameWeek(
                 new Date(),
-                parseISO(task.getDate())
+                parseISO(task.date)
                 )){
                 domCreate.task(app.getProjects()[i], task);
             }

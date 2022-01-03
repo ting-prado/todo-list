@@ -1,10 +1,12 @@
 const app = (() => {
-    const taskArr = [
+    let taskArr = localStorage.getItem('taskArr');
+    taskArr = (taskArr) ? (JSON.parse(taskArr)) : [
         ['personal']
     ];
 
     const addNewProject = project => {
         taskArr.push([project]);
+        localStorage.setItem('taskArr', JSON.stringify(taskArr));
     }
 
     const removeProject = project => {
@@ -13,6 +15,7 @@ const app = (() => {
                 taskArr.splice(i, 1);
             }
         }
+        localStorage.setItem('taskArr', JSON.stringify(taskArr));
     }
 
     const getProjects = () => taskArr.map(elements => elements[0]);
@@ -42,6 +45,7 @@ const app = (() => {
                 taskArr[i].push(task);
             }
         }
+        localStorage.setItem('taskArr', JSON.stringify(taskArr));
     }
 
     const removeTask = (project, taskObj) => {
@@ -50,18 +54,19 @@ const app = (() => {
                 taskArr[i].splice(taskArr[i].indexOf(taskObj), 1);
             }
         }
+        localStorage.setItem('taskArr', JSON.stringify(taskArr));
     }
 
-    return {taskArr, addNewProject, getProjects, getTasksWithinProj, getNumOfProjs, getNumOfTasks, addTasktoArr, removeProject, removeTask}
+    return {addNewProject, getProjects, getTasksWithinProj, getNumOfProjs, getNumOfTasks, addTasktoArr, removeProject, removeTask}
 })();
 
 const Task = (title, desc, date, priority) => {
-    const getTitle = () => title;
-    const getDesc = () => desc;
-    const getDate = () => date;
-    const getPriority = () => priority[0].toUpperCase() + priority.slice(1);
-
-    return {getTitle, getDesc, getDate, getPriority}
+    return {
+        title: title,
+        desc: desc,
+        date: date,
+        priority: priority[0].toUpperCase() + priority.slice(1)
+    }
 }
 
 export {Task, app};

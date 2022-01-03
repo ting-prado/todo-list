@@ -40,18 +40,18 @@ const domCreate = (() => {
         title.classList.add('info');
         title.type = 'text';
         title.name = ' title';
-        title.value = taskObj.getTitle();
+        title.value = taskObj.title;
         title.disabled = 'true';
 
         const displayDue = document.createElement('p');
         displayDue.classList.add('displayDue');
 
-        if(taskObj.getDate() == undefined || taskObj.getDate() == '') {
+        if(taskObj.date == undefined || taskObj.date == '') {
             displayDue.textContent = '';
         }
         else {
             displayDue.textContent = formatDistance(
-                new Date(taskObj.getDate()),
+                new Date(taskObj.date),
                 new Date(),
                 {addSuffix: true}
             );
@@ -72,7 +72,7 @@ const domCreate = (() => {
         descLabel.for = 'desc';
         desc.classList.add('desc');
         desc.classList.add('info');
-        desc.value = taskObj.getDesc();
+        desc.value = taskObj.desc;
         desc.placeholder = 'No description...';
         desc.disabled = 'true';
     
@@ -98,7 +98,7 @@ const domCreate = (() => {
         date.classList.add('input');
         date.classList.add('info');
         date.name = 'duedate';
-        date.value = taskObj.getDate();
+        date.value = taskObj.date;
         date.disabled = true;
     
         const priorityLabel = document.createElement('label');
@@ -111,8 +111,8 @@ const domCreate = (() => {
         priority.name = 'priority';
         priority.disabled = 'true';
         const prioOption = document.createElement('option');
-        prioOption.value = taskObj.getPriority().toLowerCase();
-        prioOption.textContent = taskObj.getPriority();
+        prioOption.value = taskObj.priority.toLowerCase();
+        prioOption.textContent = taskObj.priority;
     
         const btnDiv = document.createElement('div');
         btnDiv.classList.add('btnDiv');
