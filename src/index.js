@@ -3,10 +3,28 @@ import { app, Task } from './task';
 import { parseISO, isSameDay, isSameWeek } from 'date-fns';
 
 const projectAdder = document.querySelector('#project-adder');
-projectAdder.addEventListener('click', domCreate.newProject);
+const content = document.querySelector('#content');
+const cancelBtn = document.querySelector('#cancelBtn');
+const desc = document.querySelector('#desc');
+const date = document.querySelector('#date');
+const priority = document.querySelector('#priority');
+const project = document.querySelector('#project');
+const title = document.querySelector('#title');
+const colorPicker = document.querySelector('#color-picker');
+const addBtn = document.querySelector('#addBtn');
+const addImg = document.querySelector('.titleIcon');
+const detailsDiv = document.querySelector('.details');
+const tasksCont = document.querySelector('#tasksCont');
+const allTasksBtn = document.querySelector('#allTasks');
+const todayTasksBtn = document.querySelector('#todayTasks');
+const weekTasksBtn = document.querySelector('#weekTasks');
+const dispSidebarBtn = document.querySelector('#dispSidebar');
+detailsDiv.style.display = 'none';
 
 window.addEventListener('load', domCreate.existingProjects);
 window.addEventListener('load', () => {
+    content.style.background = localStorage.getItem('bgColor');
+
     for(let i=0; i<app.getNumOfProjs(); i++){
         app.getTasksWithinProj(app.getProjects()[i]).forEach(task => {
             domCreate.task(app.getProjects()[i], task);
@@ -14,15 +32,10 @@ window.addEventListener('load', () => {
     }
 });
 
-const colorPicker = document.querySelector('#color-picker');
-const content = document.querySelector('#content');
 colorPicker.addEventListener('change', () => {
     content.style.background = colorPicker.value;
+    localStorage.setItem('bgColor', content.style.background);
 });
-
-const addImg = document.querySelector('.titleIcon');
-const detailsDiv = document.querySelector('.details');
-detailsDiv.style.display = 'none';
 
 addImg.addEventListener('click', () => {
     if(detailsDiv.style.display == 'flex'){
@@ -33,13 +46,6 @@ addImg.addEventListener('click', () => {
     }
 });
 
-const cancelBtn = document.querySelector('#cancelBtn');
-const desc = document.querySelector('#desc');
-const date = document.querySelector('#date');
-const priority = document.querySelector('#priority');
-const project = document.querySelector('#project');
-const title = document.querySelector('#title');
-
 cancelBtn.addEventListener('click', () => {
     desc.value = '';
     date.value = '';
@@ -49,34 +55,16 @@ cancelBtn.addEventListener('click', () => {
     detailsDiv.style.display = 'none';
 });
 
-const addBtn = document.querySelector('#addBtn');
+projectAdder.addEventListener('click', domCreate.newProject);
+
 addBtn.addEventListener('click', createNewTask);
+
 title.addEventListener('keydown', e => {
     if(e.key == 'Enter'){
         createNewTask();
     }
 });
 
-function createNewTask() {
-    if(title.value != '' && project.value != '') {
-        let newTask = Task(title.value, desc.value, date.value, priority.value);
-        domCreate.task(project.value, newTask);
-        app.addTasktoArr(project.value, newTask);
-        desc.value = '';
-        date.value = '';
-        priority.value = 'low';
-        title.value = '';
-        detailsDiv.style.display = 'none';
-    }
-    else {
-        alert('Please enter task title and specify which project it belongs to.');
-    }
-}
-
-const tasksCont = document.querySelector('#tasksCont');
-const allTasksBtn = document.querySelector('#allTasks');
-const todayTasksBtn = document.querySelector('#todayTasks');
-const weekTasksBtn = document.querySelector('#weekTasks');
 allTasksBtn.addEventListener('click', () => {
     allTasksBtn.style.color = 'skyblue';
     todayTasksBtn.style.color = 'whitesmoke';
@@ -126,7 +114,6 @@ weekTasksBtn.addEventListener('click', () => {
     }
 });
 
-const dispSidebarBtn = document.querySelector('#dispSidebar');
 dispSidebarBtn.addEventListener('click', () => {
     const sidebar = document.querySelector('#sidebar');
     if(sidebar.style.display == 'none') {
@@ -136,3 +123,19 @@ dispSidebarBtn.addEventListener('click', () => {
         sidebar.style.display = 'none';
     }
 });
+
+function createNewTask() {
+    if(title.value != '' && project.value != '') {
+        let newTask = Task(title.value, desc.value, date.value, priority.value);
+        domCreate.task(project.value, newTask);
+        app.addTasktoArr(project.value, newTask);
+        desc.value = '';
+        date.value = '';
+        priority.value = 'low';
+        title.value = '';
+        detailsDiv.style.display = 'none';
+    }
+    else {
+        alert('Please enter task title and specify which project it belongs to.');
+    }
+}

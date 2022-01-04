@@ -394,6 +394,7 @@ input[type=datetime-local] {
     }
 
     .displayDue {
-        font-size: 90%;
+        font-size: 85%;
+        top: 0.7rem;
     }
 }
