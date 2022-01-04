@@ -232,7 +232,6 @@ li span {
 }
 
 .detailsLeft, .detailsRight {
-    box-sizing: border-box;
     width: 50%;
     height: 100%;
     padding-left: 0.8em;
@@ -268,6 +267,7 @@ li span {
     outline: none;
     font-size: 0.9rem;
     margin-bottom: 0.2rem;
+    width: auto;
 }
 
 input[type=datetime-local] {
@@ -339,6 +339,10 @@ input[type=datetime-local] {
     #colordiv {
         width: 30%;
     }
+
+    .taskCont {
+        width: 90%;
+    }
 }
 
 @media screen and (max-width: 711px) {
@@ -395,6 +399,11 @@ input[type=datetime-local] {
     }
 
     .detailsLeft, .detailsRight {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .input {
         width: 100%;
     }
 
