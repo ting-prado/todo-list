@@ -27,6 +27,21 @@ const domCreate = (() => {
         
         const top = document.createElement('div');
         top.classList.add('taskTop');
+
+        const prioColor = document.createElement('div');
+        prioColor.classList.add('prioColor');
+        switch(taskObj.priority) {
+            case 'Low':
+                prioColor.style.background = 'darkgreen';
+                break;
+            case 'Medium':
+                prioColor.style.background = '#CCCC00';
+                break;
+            case 'High':
+                prioColor.style.background = 'darkred';
+                break;
+        }
+
         const addImg = new Image();
         addImg.src = './icons/plus.png';
         addImg.classList.add('titleIcon');
@@ -121,6 +136,7 @@ const domCreate = (() => {
         deleteBtn.textContent = 'Delete Task';
     
         tasksCont.appendChild(div);
+        div.appendChild(prioColor);
         div.appendChild(top);
         top.appendChild(addImg);
         top.appendChild(checkbox);
