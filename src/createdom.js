@@ -169,10 +169,15 @@ const domCreate = (() => {
         const newItem = document.createElement('li');
         const input = document.createElement('input');
         input.type = 'text';
+        const close = document.createElement('img');
+        close.src = './icons/delete.png';
+        close.classList.add('icon');
         input.classList.add('project-input');
         newItem.classList.add('project-options');
+
         newItem.appendChild(input);
         sbProject.appendChild(newItem);
+        newItem.appendChild(close);
     
         input.addEventListener('keydown', e => {
             if(e.key == 'Enter') {
@@ -183,11 +188,6 @@ const domCreate = (() => {
                 newItem.removeChild(input);
                 app.addNewProject(projValue);
                 updateProj();
-
-                const close = document.createElement('img');
-                close.src = './icons/delete.png';
-                close.classList.add('icon');
-                newItem.appendChild(close);
                 
                 span.addEventListener('click', () => {
                     tasksCont.innerHTML = '';
@@ -195,14 +195,14 @@ const domCreate = (() => {
                         task(projValue, item);
                     });
                 });
-
-                close.addEventListener('click', () => {
-                    app.removeProject(projValue);
-                    sbProject.removeChild(newItem);
-        
-                    updateProj();
-                });
             }
+        });
+
+        close.addEventListener('click', () => {
+            app.removeProject(projValue);
+            sbProject.removeChild(newItem);
+
+            updateProj();
         });
     }
 

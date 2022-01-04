@@ -125,3 +125,14 @@ weekTasksBtn.addEventListener('click', () => {
         });
     }
 });
+
+const dispSidebarBtn = document.querySelector('#dispSidebar');
+dispSidebarBtn.addEventListener('click', () => {
+    const sidebar = document.querySelector('#sidebar');
+    if(sidebar.style.display == 'none') {
+        sidebar.style.display = 'block';
+    }
+    else {
+        sidebar.style.display = 'none';
+    }
+});
