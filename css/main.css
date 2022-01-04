@@ -291,3 +291,109 @@ input[type=datetime-local] {
 .btn:active {
     background: rgb(100, 100, 100);
 }
+
+#forMobile {
+    position: fixed;
+    top: 0;
+    height: 5%;
+    background: rgb(68, 68, 68);
+    width: 100%;
+    color: whitesmoke;
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+    display: none;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+#forMobile h1 {
+    width: 85%;
+    text-align: center;
+}
+
+#forMobile img {
+    margin-left: 4%;
+    width: 1.2rem;
+    height: 1rem;
+}
+
+#forMobile img:hover {
+    cursor: pointer;
+}
+
+@media screen and (min-width: 712px) and (max-width: 768px){
+    body {
+        grid-template-columns: 30% 1fr;
+    }
+
+    #colordiv {
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 711px) {
+    body {
+        display: block;
+    }
+
+    #sidebar {
+        display: none;
+    }
+
+    #forMobile {
+        display: flex;
+    }
+
+    #content {
+        padding-top: 13%;
+    }
+
+    .taskCont {
+        width: 95%;
+    }
+
+    #sidebar {
+        width: 60%;
+        position: absolute;
+        z-index: 1;
+        height: 0;
+        top: 5%;
+        animation: slide 0.4s forwards;
+    }
+
+    @keyframes slide {
+        100% {
+            height: 100%;
+        }
+    }
+
+    #sidebar h1{
+        display: none;
+    }
+
+    #colordiv {
+        width: 100%;
+        bottom: 15%;
+    }
+
+    .details {
+        flex-direction: column;
+    }
+
+    .detailsLeft, .detailsRight {
+        width: 100%;
+    }
+
+    .btnDiv {
+        margin-top: 0.5rem;
+    }
+
+    .title {
+        width: auto;
+        font-size: 90%;
+    }
+
+    .displayDue {
+        font-size: 90%;
+    }
+}
