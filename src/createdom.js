@@ -198,7 +198,7 @@ const domCreate = (() => {
         input.addEventListener('keydown', e => {
             if(e.key == 'Enter') {
                 const span = document.createElement('span');
-                newItem.appendChild(span);
+                newItem.insertBefore(span, close);
                 projValue = input.value.toLowerCase();
                 span.textContent = projValue[0].toUpperCase() + projValue.slice(1).toLowerCase();
                 newItem.removeChild(input);

@@ -215,7 +215,7 @@ li span {
     color: gray;
     font-size: 1rem;
     height: 60%;
-    max-width: 20%;
+    max-width: 25%;
     justify-self: end;
     position: absolute;
     right: 0.5rem;
@@ -327,10 +327,6 @@ input[type=datetime-local] {
     height: 1rem;
 }
 
-#forMobile img:hover {
-    cursor: pointer;
-}
-
 @media screen and (min-width: 712px) and (max-width: 768px){
     body {
         grid-template-columns: 30% 1fr;
@@ -342,6 +338,10 @@ input[type=datetime-local] {
 
     .taskCont {
         width: 90%;
+    }
+
+    .title {
+        max-width: 80%;
     }
 }
 
