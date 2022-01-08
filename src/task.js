@@ -62,9 +62,9 @@ const app = (() => {
 
 const Task = (title, desc, date, priority) => {
     return {
-        title: title,
-        desc: desc,
-        date: date,
+        title,
+        desc,
+        date,
         priority: priority[0].toUpperCase() + priority.slice(1)
     }
 }
