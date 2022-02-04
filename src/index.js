@@ -1,6 +1,7 @@
 import domCreate from './createdom';
 import { app, Task } from './task';
 import { parseISO, isSameDay, isSameWeek } from 'date-fns';
+import ConvertRGBtoHex from './rgbtohex';
 
 const projectAdder = document.querySelector('#project-adder');
 const content = document.querySelector('#content');
@@ -23,7 +24,16 @@ detailsDiv.style.display = 'none';
 
 window.addEventListener('load', domCreate.existingProjects);
 window.addEventListener('load', () => {
-    content.style.background = localStorage.getItem('bgColor');
+    const contColor = localStorage.getItem('bgColor');
+    if(contColor) {
+        content.style.background = contColor;
+        const colorArr = contColor.split(/[,()]/, 4);
+        const hexColor = ConvertRGBtoHex(Number(colorArr[1]), Number(colorArr[2]), Number(colorArr[3]));
+        colorPicker.value = hexColor;
+    } else {
+        colorPicker.value = '#83b4dd';
+        content.style.background = '#83b4dd';
+    }
 
     for(let i=0; i<app.getNumOfProjs(); i++){
         app.getTasksWithinProj(app.getProjects()[i]).forEach(task => {
