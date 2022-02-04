@@ -60,7 +60,30 @@ hr {
     flex-direction: column;
     color: inherit;
     padding: 0.8rem;
+    max-height: 180px;
+    overflow-y: auto;
+    margin-bottom: 5px;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
 
 #projectsDiv img {
     vertical-align: -16%;
@@ -354,6 +377,10 @@ input[type=datetime-local] {
         display: none;
     }
 
+    #projects {
+        max-height: 40vh;
+    }
+
     #forMobile {
         display: flex;
     }
@@ -387,7 +414,7 @@ input[type=datetime-local] {
 
     #colordiv {
         width: 100%;
-        bottom: 15%;
+        bottom: 12%;
     }
 
     .details {
