@@ -328,7 +328,7 @@ input[type=datetime-local] {
 #forMobile {
     position: fixed;
     top: 0;
-    height: 6vh;
+    height: 35px;
     background: rgb(68, 68, 68);
     width: 100%;
     color: whitesmoke;
@@ -385,12 +385,9 @@ input[type=datetime-local] {
         display: flex;
     }
 
-    #content {
-        padding-top: 8vh;
-    }
-
     .taskCont {
         width: 95%;
+        margin-top: 38px;
     }
 
     #sidebar {
