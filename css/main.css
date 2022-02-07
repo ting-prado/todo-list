@@ -328,7 +328,7 @@ input[type=datetime-local] {
 #forMobile {
     position: fixed;
     top: 0;
-    height: 5%;
+    height: 6vh;
     background: rgb(68, 68, 68);
     width: 100%;
     color: whitesmoke;
@@ -386,7 +386,7 @@ input[type=datetime-local] {
     }
 
     #content {
-        padding-top: 13%;
+        padding-top: 8vh;
     }
 
     .taskCont {
