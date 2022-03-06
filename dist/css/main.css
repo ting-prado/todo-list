@@ -127,7 +127,7 @@ li span {
     align-items: center;
     overflow-y: auto;
     height: 100vh;
-    padding: 0.5rem;
+    padding: 1rem;
 }
 
 #tasksCont {
@@ -387,7 +387,10 @@ input[type=datetime-local] {
 
     .taskCont {
         width: 95%;
-        margin-top: 38px;
+    }
+
+    #content {
+        padding-top: 55px;
     }
 
     #sidebar {
@@ -395,7 +398,7 @@ input[type=datetime-local] {
         position: absolute;
         z-index: 2;
         height: 0;
-        top: 5%;
+        top: 35px;
         animation: slide 0.4s forwards;
     }
 
